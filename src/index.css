@@ -14,6 +14,7 @@ body {
   --background: #17191b;
   --page-bg: #343A40;
   --nav-bar: #CED4DA ;
+  --frame-and-text: #6C757D;
 }
 
 @media (min-width: 1024px) {
