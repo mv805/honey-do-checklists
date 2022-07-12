@@ -6,6 +6,8 @@
 
 main {
   background-color: var(--page-bg);
+  display: flex;
+  justify-content: center;
 }
 
 @media (min-width: 1024px) {
