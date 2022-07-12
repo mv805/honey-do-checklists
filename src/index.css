@@ -15,6 +15,7 @@ body {
   --page-bg: #343A40;
   --nav-bar: #CED4DA ;
   --frame-and-text: #6C757D;
+  --light-font: #F8F9FA;
 }
 
 @media (min-width: 1024px) {
