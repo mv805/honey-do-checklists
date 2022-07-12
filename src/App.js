@@ -3,6 +3,7 @@ import './App.css';
 import MainHeader from './components/MainHeader';
 import ChecklistPage from './pages/ChecklistPage';
 import LoginPage from './pages/LoginPage';
+import checklists from './checklists.json';
 
 function App() {
   return (
@@ -17,7 +18,7 @@ function App() {
             <LoginPage />
           </Route>
           <Route path="/userinfo/my-checklists">
-            <ChecklistPage />
+            <ChecklistPage data={checklists}/>
           </Route>
         </Switch>
       </main>

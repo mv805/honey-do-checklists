@@ -1,0 +1,154 @@
+{
+    "Daily Chores": {
+        "Categories": {
+            "Bedroom": [
+                {
+                    "title": "Make bed",
+                    "complete": false
+                }
+            ],
+            "Kitchen": [
+                {
+                    "title": "Wash dishes",
+                    "complete": false
+                },
+                {
+                    "title": "Wipe counters",
+                    "complete": false
+                },
+                {
+                    "title": "Take out trash",
+                    "complete": false
+                },
+                {
+                    "title": "Clean floor",
+                    "complete": false
+                },
+                {
+                    "title": "Clean table top",
+                    "complete": false
+                }
+            ],
+            "Bathroom":[
+                {
+                    "title": "Clean counters and floor",
+                    "complete": false
+                }
+            ],
+            "General":[
+                {
+                    "title": "One load of laundry",
+                    "complete": false
+                }
+            ]
+        }
+    },
+    "Diaper Bag": {
+        "Categories": {
+            "Changing": [
+                {
+                    "title": "Diapers",
+                    "complete": false
+                },
+                {
+                    "title": "Wipes",
+                    "complete": false
+                },
+                {
+                    "title": "Changing Pad",
+                    "complete": false
+                },
+                {
+                    "title": "Trash bags",
+                    "complete": false
+                }
+            ],
+            "Feeding": [
+                {
+                    "title": "Emergency Bottle (permanent)",
+                    "complete": false
+                },
+                {
+                    "title": "Burp Cloth",
+                    "complete": false
+                },
+                {
+                    "title": "Formula (check expiration)",
+                    "complete": false
+                }
+            ],
+            "Toys":[
+                {
+                    "title": "Clean counters and floor",
+                    "complete": false
+                }
+            ],
+            "General":[
+                {
+                    "title": "Binky",
+                    "complete": false
+                },
+                {
+                    "title": "Binky wipes",
+                    "complete": false
+                },
+                {
+                    "title": "Nose Cleaner",
+                    "complete": false
+                },
+                {
+                    "title": "Baby sunscreen",
+                    "complete": false
+                },
+                {
+                    "title": "Extra cloth sheet",
+                    "complete": false
+                },
+                {
+                    "title": "Change of clothes",
+                    "complete": false
+                }
+            ],
+            "Parents":[
+                {
+                    "title": "Snacks",
+                    "complete": false
+                },
+                {
+                    "title": "Masks",
+                    "complete": false
+                },
+                {
+                    "title": "Hand sanitizer",
+                    "complete": false
+                },
+                {
+                    "title": "Wet wipes",
+                    "complete": false
+                },
+                {
+                    "title": "Gum",
+                    "complete": false
+                }
+            ],
+            "Before each outing":[
+                {
+                    "title": "Check all pumping equipment",
+                    "complete": false
+                },
+                {
+                    "title": "Extra bottle with parts",
+                    "complete": false
+                },
+                {
+                    "title": "Some toy",
+                    "complete": false
+                },
+                {
+                    "title": "Teether",
+                    "complete": false
+                }
+            ]
+        }
+    }
+}
