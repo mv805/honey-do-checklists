@@ -13,7 +13,7 @@ const LoginPage = () => {
                 <h1>Password</h1>
                 <p>field</p>
             </CategoryFrame>
-            <button><Link to="/userinfo/my-checklists">Submit</Link></button>
+            <Link to="/userinfo/my-checklists">Submit</Link>
         </div>
     );
 };
