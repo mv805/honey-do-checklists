@@ -3,17 +3,35 @@ import classes from './ChecklistPage.module.css';
 import pageStyle from './Pages.module.css';
 import CategoryFrame from '../UI/CategoryFrame';
 import uniqid from 'uniqid';
+import { useHistory } from 'react-router-dom';
 
 const ChecklistPage = (props) => {
+
+    const history = useHistory();
+
+    const addChecklist = () => {
+        props.onAddChecklist('Test List Confirmed');
+    };
+
+    const selectList = (e) => {
+        let urlFormat = e.target.innerHTML.replace(/\s/g, '-');
+        props.onTaskPageChange(e.target.innerHTML);
+        history.push(`/userinfo/my-checklists/${urlFormat}`);
+    };
+
     return (
-        <div className={pageStyle.page}>
+        <div className={ pageStyle.page }>
             <CategoryFrame title="My Checklists">
-                <div className={classes.lists}>
-                    {Object.keys(props.data).map(checklist => {
-                        return <button key={uniqid()}>{checklist}</button>
-                    })}
+                <div className={ classes.lists }>
+                    { Object.keys(props.data).map(checklist => {
+                        return (
+                            <button key={ uniqid() } onClick={selectList}>
+                                { checklist }
+                            </button>);
+                    }) }
                 </div>
             </CategoryFrame>
+            <button onClick={addChecklist}>Add list</button>
         </div>
     );
 };
