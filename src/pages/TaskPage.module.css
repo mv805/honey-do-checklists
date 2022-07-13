@@ -1,0 +1,8 @@
+.title {
+    color: var(--light-font);
+    text-align: left;
+    font-size: 1.5rem;
+    text-decoration: underline;
+    padding: 1rem 0 0 2rem;
+    margin: 0;
+}
