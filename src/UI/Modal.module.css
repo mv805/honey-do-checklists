@@ -1,0 +1,17 @@
+.backdrop {
+    background-color: rgba(0, 0, 0, 0.753);
+    position: fixed;
+    inset: 0;
+    z-index: 1;
+}
+
+.modal {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: rgba(255, 0, 0, 0);
+    inset: 0;
+    position: fixed;
+    z-index: 2;
+}
+

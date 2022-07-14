@@ -4,6 +4,8 @@ import pageStyle from './Pages.module.css';
 import CategoryFrame from '../UI/CategoryFrame';
 import uniqid from 'uniqid';
 import { useHistory } from 'react-router-dom';
+import Modal from '../UI/Modal';
+import PromptFrame from '../components/PromptFrame';
 
 const ChecklistPage = (props) => {
 
@@ -21,6 +23,9 @@ const ChecklistPage = (props) => {
 
     return (
         <div className={ pageStyle.page }>
+        <Modal>
+            <PromptFrame />
+        </Modal>
             <CategoryFrame title="My Checklists">
                 <div className={ classes.lists }>
                     { Object.keys(props.data).map(checklist => {
