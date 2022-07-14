@@ -3,6 +3,7 @@ import CategoryFrame from '../UI/CategoryFrame';
 import pageStyle from './Pages.module.css';
 import classes from './TaskPage.module.css';
 import uniqid from 'uniqid';
+import TaskItem from '../components/TaskItem';
 
 const TaskPage = (props) => {
 
@@ -17,7 +18,13 @@ const TaskPage = (props) => {
                         <CategoryFrame title={ category } key={ uniqid() }>
                             {
                                 tasks.map((task) => {
-                                    return <div key={ uniqid() }>{ task.title }</div>;
+                                    return <TaskItem 
+                                    key={ uniqid() } 
+                                    taskCategory={category}
+                                    taskName={ task.title }
+                                    isChecked={task.complete}
+                                    onCheck = {(e) => {props.onCheck(e)}}
+                                    />;
                                 })
                             }
                         </CategoryFrame>

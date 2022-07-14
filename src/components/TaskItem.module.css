@@ -1,0 +1,27 @@
+.bar {
+    color: var(--light-font);
+    background-color: var(--frame-and-text);
+    display: flex;
+    justify-content: space-between;
+    border-radius: 10px;
+    width: 100%;
+    box-sizing: border-box;
+    overflow: hidden;
+    padding: 0 .75rem;
+}
+.button {
+    border: none;
+    color: var(--background);
+    background-color: rgba(0, 0, 0, 0);
+    cursor: pointer;
+}
+
+.bar p {
+    width: 80%;
+    padding-left: .5rem;
+    text-align: left;
+}
+
+.checked {
+    color: var(--light-font);
+}

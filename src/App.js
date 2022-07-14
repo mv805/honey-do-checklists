@@ -4,12 +4,13 @@ import { useReducer, useState } from 'react';
 import MainHeader from './components/MainHeader';
 import ChecklistPage from './pages/ChecklistPage';
 import LoginPage from './pages/LoginPage';
-import checklists from './checklists.json';
+import checklistsJSON from './checklists.json';
 import TaskPage from './pages/TaskPage';
 
 function App() {
 
   const checklistReducer = (state, action) => {
+
     switch (action.type) {
       case 'ADD_LIST':
         return {
@@ -20,6 +21,30 @@ function App() {
             }
           }
         };
+      case 'CHECK_TASK':
+
+        let modifiedList = {
+          ...state,
+          [`${ action.list }`]: {
+            Categories: {
+              ...state[`${ action.list }`].Categories,
+              [`${ action.category }`]: [
+                ...state[`${ action.list }`].Categories[`${ action.category }`]
+              ]
+            }
+          }
+        };
+
+        let taskToChangeIndex;
+
+        modifiedList[`${ action.list }`].Categories[`${ action.category }`].forEach((element, index) => {
+          if (element.title === action.title) {
+            taskToChangeIndex = index;
+          }
+        });
+        
+        modifiedList[`${ action.list }`].Categories[`${ action.category }`][taskToChangeIndex].complete = action.complete;
+        return modifiedList;
       default:
         throw new Error();
     }
@@ -29,16 +54,38 @@ function App() {
     dispatchChecklistState(
       {
         type: 'ADD_LIST',
-        title: listName
+        title: listName,
       }
     );
   };
+
   const changeToTaskPage = (taskName) => {
     setCurrentList(taskName);
   };
 
-  const [currentList, setCurrentList] = useState("Daily Chores");
-  const [checklistState, dispatchChecklistState] = useReducer(checklistReducer, checklists);
+  const checkTask = (task) => {
+
+    console.log(
+      "List:", currentList,
+      "Category:", task.category,
+      "Title:", task.title,
+      "Complete:", task.complete);
+
+    dispatchChecklistState(
+      {
+        type: 'CHECK_TASK',
+        title: task.title,
+        complete: task.complete,
+        category: task.category,
+        list: currentList
+      }
+
+
+    );
+  };
+
+  const [currentList, setCurrentList] = useState();
+  const [checklistState, dispatchChecklistState] = useReducer(checklistReducer, checklistsJSON);
 
   return (
     <div className='App'>
@@ -58,7 +105,11 @@ function App() {
               onTaskPageChange={ changeToTaskPage } />
           </Route>
           <Route path="/userinfo/my-checklists/:taskId">
-            <TaskPage currentChecklist={currentList} checklists={ checklistState }/>
+            <TaskPage
+              currentChecklist={ currentList }
+              checklists={ checklistState }
+              onCheck={ checkTask }
+            />
           </Route>
         </Switch>
       </main>
