@@ -10,7 +10,7 @@ main {
   justify-content: center;
 }
 
-@media (min-width: 1024px) {
+/* @media (min-width: 1024px) {
 
   .App {
     text-align: center;
@@ -23,4 +23,4 @@ main {
     margin-top: 1rem;
   }
 
-}
+} */
