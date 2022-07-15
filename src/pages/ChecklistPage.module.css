@@ -13,4 +13,9 @@
     height: 60px;
     color: var(--light-font);
     font-size: 1rem;
+    cursor: pointer;
+}
+
+.lists button:hover {
+    text-decoration: underline;
 }

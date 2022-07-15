@@ -10,6 +10,27 @@
     text-align: left;
 }
 
+.header {
+    display: flex;
+    align-items: center;
+    column-gap: .5rem;
+}
+
+.header-icon {
+    color: var(--background);
+}
+
+.header button {
+    border: none;
+    background-color: rgba(0, 0, 0, 0);
+    cursor: pointer;
+    padding: 0;
+}
+
+.header button *:hover{
+    color: var(--light-font);
+}
+
 .window {
     border: 4px solid var(--frame-and-text);
     border-radius: 11px;

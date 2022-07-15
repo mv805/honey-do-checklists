@@ -16,6 +16,8 @@ body {
   --nav-bar: #CED4DA ;
   --frame-and-text: #6C757D;
   --light-font: #F8F9FA;
+  --input-bg: #D9D9D9;
+  --warning-color: rgb(212, 95, 95);
 }
 
 /* @media (min-width: 1024px) {
