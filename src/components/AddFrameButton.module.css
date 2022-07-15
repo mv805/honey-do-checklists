@@ -1,0 +1,21 @@
+.button {
+    display: flex;
+    flex-direction: column;
+    color: var(--light-font);
+    font: inherit;
+    background-color: rgba(0, 0, 0, 0);
+    border: none;
+    align-items: center;
+    cursor: pointer;
+    transition: all .3s ease-in-out;
+}
+
+.highlight{
+    text-decoration: underline;
+}
+
+.button h1 {
+    font-size: 1rem;
+    margin: 0;
+    display: flex;
+}

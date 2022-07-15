@@ -12,12 +12,17 @@ function App() {
   const checklistReducer = (state, action) => {
 
     switch (action.type) {
-      case 'ADD_LIST':
+      case 'ADD_CHECKLIST':
         return {
           ...state,
           [`${ action.title }`]: {
             Categories: {
-              General: []
+              General: [
+                {
+                  title: 'New Task',
+                  complete: false
+                }
+              ]
             }
           }
         };
@@ -53,7 +58,7 @@ function App() {
   const addChecklist = (listName) => {
     dispatchChecklistState(
       {
-        type: 'ADD_LIST',
+        type: 'ADD_CHECKLIST',
         title: listName,
       }
     );
@@ -65,11 +70,11 @@ function App() {
 
   const checkTask = (task) => {
 
-    console.log(
-      "List:", currentList,
-      "Category:", task.category,
-      "Title:", task.title,
-      "Complete:", task.complete);
+    // console.log(
+    //   "List:", currentList,
+    //   "Category:", task.category,
+    //   "Title:", task.title,
+    //   "Complete:", task.complete);
 
     dispatchChecklistState(
       {

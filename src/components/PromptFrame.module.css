@@ -4,5 +4,80 @@
     max-width: 300px;
     max-height: 400px;
     border-radius: 10px;
-    background-color: green;
+    background-color: var(--light-font);
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    box-sizing: border-box;
+}
+
+.frame h1 {
+    color: var(--light-font);
+    background-color: var(--frame-and-text);
+    margin: 0;
+    height: 20%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-weight: lighter;
+    font-size: 1.5rem;
+    padding: 1rem;
+}
+
+.buttons {
+    display: flex;
+    justify-content: space-around;
+    background-color: var(--frame-and-text);
+    height: 20%;
+    padding: 1rem;
+}
+
+.buttons button {
+    width: 100%;
+    font: inherit;
+    color: var(--light-font);
+    background-color: var(--frame-and-text);
+    border: none;
+    cursor: pointer;
+    border-radius: 5px;
+}
+
+.buttons button:active {
+    filter: brightness(110%);
+}
+
+.input {
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    padding: 1rem;
+    height: 60%;
+}
+
+.input label {
+    color: var(--frame-and-text);
+    font-size: 1.5rem;
+}
+
+.input input {
+    background-color: var(--input-bg);
+    outline: none;
+    border: 2px solid var(--frame-and-text);
+    border-radius: 5px;
+    font: inherit;
+}
+
+.invalid-msg {
+    white-space: pre-line;
+    color: var(--warning-color);
+}
+
+input.input-invalid {
+    border-color: var(--warning-color);
+    background-color: rgb(255, 234, 234);
+}
+
+.warning {
+    height: 2rem;
 }
