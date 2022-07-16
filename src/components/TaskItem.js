@@ -7,14 +7,13 @@ const TaskItem = (props) => {
 
     const [isChecked, setIsChecked] = useState(props.isChecked);
 
-    const toggleCheck = (e) => {
+    const toggleCheck = () => {
 
         setIsChecked(prevState => !prevState);
 
         props.onCheck({
             title: props.taskName,
             category: props.taskCategory,
-            complete: !isChecked
         });
     };
 

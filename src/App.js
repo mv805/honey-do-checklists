@@ -4,62 +4,98 @@ import { useReducer, useState } from 'react';
 import MainHeader from './components/MainHeader';
 import ChecklistPage from './pages/ChecklistPage';
 import LoginPage from './pages/LoginPage';
-import checklistsJSON from './checklists.json';
+import checklistDataRaw from './checklists.json';
 import TaskPage from './pages/TaskPage';
+import uniqid from 'uniqid';
+
+//adding uniq ids for the keys to the raw data
+checklistDataRaw.checklists.forEach(checklist => {
+  checklist['id'] = uniqid();
+  checklist.categories.forEach(category => {
+    category['id'] = uniqid();
+    category.tasks.forEach(task => {
+      task['id'] = uniqid();
+    });
+  });
+});
 
 function App() {
 
   const checklistReducer = (state, action) => {
 
+    let modifiedList;
+    let currentListIndex;
+    let categoryIndex;
+    let taskIndex;
+
     switch (action.type) {
+
       case 'ADD_CHECKLIST':
-        return {
-          ...state,
-          [`${ action.title }`]: {
-            Categories: {
-              General: [
-                {
-                  title: 'New Task',
-                  complete: false
-                }
-              ]
-            }
-          }
-        };
-      case 'CHECK_TASK':
 
-        let modifiedList = {
-          ...state,
-          [`${ action.list }`]: {
-            Categories: {
-              ...state[`${ action.list }`].Categories,
-              [`${ action.category }`]: [
-                ...state[`${ action.list }`].Categories[`${ action.category }`]
-              ]
-            }
-          }
-        };
+        //if the list exists, skip instead of overwriting
+        if (state.checklists.filter(checklist => checklist.name === action.newListName).length > 0) {
+          console.log('List already exists, skipping...');
+          return { ...state };
+        }
 
-        let taskToChangeIndex;
-
-        modifiedList[`${ action.list }`].Categories[`${ action.category }`].forEach((element, index) => {
-          if (element.title === action.title) {
-            taskToChangeIndex = index;
+        state.checklists.push(
+          {
+            id: uniqid(),
+            name: action.newListName,
+            categories: [
+              {
+                id: uniqid(),
+                name: "New Category",
+                tasks: [
+                  {
+                    title: "New Task",
+                    complete: false,
+                    id: uniqid()
+                  }
+                ]
+              }
+            ]
           }
-        });
-        
-        modifiedList[`${ action.list }`].Categories[`${ action.category }`][taskToChangeIndex].complete = action.complete;
-        return modifiedList;
+        );
+
+        return { ...state };
+
+      case 'COMPLETE_TASK':
+
+        currentListIndex = state.checklists.map(list => list.name).indexOf(currentList);
+
+        categoryIndex = state.checklists[currentListIndex].categories.map(category => category.name).indexOf(action.category);
+
+        taskIndex = state.checklists[currentListIndex].categories[categoryIndex].tasks.map(task => task.title).indexOf(action.title);
+
+        state.checklists[currentListIndex].categories[categoryIndex].tasks[taskIndex].complete = !state.checklists[currentListIndex].categories[categoryIndex].tasks[taskIndex].complete;
+
+        return { ...state };
+
+      case 'CHANGE_TASK_CATEGORY_NAME':
+
+        if (action.newName === action.category) {
+          return { ...state };
+        }
+
+        currentListIndex = state.checklists.map(list => list.name).indexOf(currentList);
+
+        categoryIndex = state.checklists[currentListIndex].categories.map(category => category.name).indexOf(action.category);
+
+        state.checklists[currentListIndex].categories[categoryIndex].name = action.newName;
+
+        return { ...state };
+
       default:
         throw new Error();
     }
   };
 
-  const addChecklist = (listName) => {
+  const addChecklist = (name) => {
     dispatchChecklistState(
       {
         type: 'ADD_CHECKLIST',
-        title: listName,
+        newListName: name,
       }
     );
   };
@@ -68,29 +104,28 @@ function App() {
     setCurrentList(taskName);
   };
 
-  const checkTask = (task) => {
-
-    // console.log(
-    //   "List:", currentList,
-    //   "Category:", task.category,
-    //   "Title:", task.title,
-    //   "Complete:", task.complete);
+  const checkTask = (taskData) => {
 
     dispatchChecklistState(
       {
-        type: 'CHECK_TASK',
-        title: task.title,
-        complete: task.complete,
-        category: task.category,
-        list: currentList
+        type: 'COMPLETE_TASK',
+        ...taskData
       }
-
 
     );
   };
 
+  const changeCategoryName = (newNameData) => {
+    dispatchChecklistState(
+      {
+        type: 'CHANGE_TASK_CATEGORY_NAME',
+        ...newNameData
+      }
+    );
+  };
+
   const [currentList, setCurrentList] = useState();
-  const [checklistState, dispatchChecklistState] = useReducer(checklistReducer, checklistsJSON);
+  const [checklistState, dispatchChecklistState] = useReducer(checklistReducer, checklistDataRaw);
 
   return (
     <div className='App'>
@@ -105,15 +140,17 @@ function App() {
           </Route>
           <Route path="/userinfo/my-checklists" exact>
             <ChecklistPage
-              data={ checklistState }
+              checklistState={ checklistState }
               onAddChecklist={ addChecklist }
               onTaskPageChange={ changeToTaskPage } />
           </Route>
           <Route path="/userinfo/my-checklists/:taskId">
             <TaskPage
-              currentChecklist={ currentList }
-              checklists={ checklistState }
+              currentChecklist={ checklistState.checklists.filter(checklist => checklist.name ===
+                currentList)[0] }
+              checklistState={ checklistState }
               onCheck={ checkTask }
+              onChangeCategoryName={ changeCategoryName }
             />
           </Route>
         </Switch>

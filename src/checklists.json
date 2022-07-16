@@ -1,154 +1,188 @@
 {
-    "Daily Chores": {
-        "Categories": {
-            "Bedroom": [
+    "checklists": [
+        {
+            "name": "Daily Chores",
+            "categories": [
                 {
-                    "title": "Make bed",
-                    "complete": false
+                    "name": "Bedroom",
+                    "tasks": [
+                        {
+                            "title": "Make bed",
+                            "complete": false
+                        }
+                    ]
+                },
+                {
+                    "name": "Kitchen",
+                    "tasks": [
+                        {
+                            "title": "Wash dishes",
+                            "complete": false
+                        },
+                        {
+                            "title": "Wipe counters",
+                            "complete": false
+                        },
+                        {
+                            "title": "Take out trash",
+                            "complete": false
+                        },
+                        {
+                            "title": "Clean floor",
+                            "complete": false
+                        },
+                        {
+                            "title": "Clean table top",
+                            "complete": false
+                        }
+                    ]
+                },
+                {
+                    "name": "Bathroom",
+                    "tasks": [
+                        {
+                            "title": "Clean counters and floor",
+                            "complete": false
+                        }
+                    ]
+                },
+                {
+                    "name": "General",
+                    "tasks": [
+                        {
+                            "title": "One load of laundry",
+                            "complete": false
+                        }
+                    ]
                 }
-            ],
-            "Kitchen": [
+            ]
+        },
+        {
+            "name": "Diaper Bag",
+            "categories": [
                 {
-                    "title": "Wash dishes",
-                    "complete": false
+                    "name": "Changing",
+                    "tasks": [
+                        {
+                            "title": "Diapers",
+                            "complete": false
+                        },
+                        {
+                            "title": "Wipes",
+                            "complete": false
+                        },
+                        {
+                            "title": "Changing Pad",
+                            "complete": false
+                        },
+                        {
+                            "title": "Trash bags",
+                            "complete": false
+                        }
+                    ]
                 },
                 {
-                    "title": "Wipe counters",
-                    "complete": false
+                    "name": "Feeding",
+                    "tasks": [
+                        {
+                            "title": "Emergency Bottle (permanent)",
+                            "complete": false
+                        },
+                        {
+                            "title": "Burp Cloth",
+                            "complete": false
+                        },
+                        {
+                            "title": "Formula (check expiration)",
+                            "complete": false
+                        }
+                    ]
                 },
                 {
-                    "title": "Take out trash",
-                    "complete": false
+                    "name": "Toys",
+                    "tasks": [
+                        {
+                            "title": "Clean counters and floor",
+                            "complete": false
+                        }
+                    ]
                 },
                 {
-                    "title": "Clean floor",
-                    "complete": false
+                    "name": "General",
+                    "tasks": [
+                        {
+                            "title": "Binky",
+                            "complete": false
+                        },
+                        {
+                            "title": "Binky wipes",
+                            "complete": false
+                        },
+                        {
+                            "title": "Nose Cleaner",
+                            "complete": false
+                        },
+                        {
+                            "title": "Baby sunscreen",
+                            "complete": false
+                        },
+                        {
+                            "title": "Extra cloth sheet",
+                            "complete": false
+                        },
+                        {
+                            "title": "Change of clothes",
+                            "complete": false
+                        }
+                    ]
                 },
                 {
-                    "title": "Clean table top",
-                    "complete": false
-                }
-            ],
-            "Bathroom":[
+                    "name": "Parents",
+                    "tasks": [
+                        {
+                            "title": "Snacks",
+                            "complete": false
+                        },
+                        {
+                            "title": "Masks",
+                            "complete": false
+                        },
+                        {
+                            "title": "Hand sanitizer",
+                            "complete": false
+                        },
+                        {
+                            "title": "Wet wipes",
+                            "complete": false
+                        },
+                        {
+                            "title": "Gum",
+                            "complete": false
+                        }
+                    ]
+                },
                 {
-                    "title": "Clean counters and floor",
-                    "complete": false
-                }
-            ],
-            "General":[
-                {
-                    "title": "One load of laundry",
-                    "complete": false
+                    "name": "Before each outing",
+                    "tasks": [
+                        {
+                            "title": "Check all pumping equipment",
+                            "complete": false
+                        },
+                        {
+                            "title": "Extra bottle with parts",
+                            "complete": false
+                        },
+                        {
+                            "title": "Some toy",
+                            "complete": false
+                        },
+                        {
+                            "title": "Teether",
+                            "complete": false
+                        }
+                    ]
                 }
             ]
         }
-    },
-    "Diaper Bag": {
-        "Categories": {
-            "Changing": [
-                {
-                    "title": "Diapers",
-                    "complete": false
-                },
-                {
-                    "title": "Wipes",
-                    "complete": false
-                },
-                {
-                    "title": "Changing Pad",
-                    "complete": false
-                },
-                {
-                    "title": "Trash bags",
-                    "complete": false
-                }
-            ],
-            "Feeding": [
-                {
-                    "title": "Emergency Bottle (permanent)",
-                    "complete": false
-                },
-                {
-                    "title": "Burp Cloth",
-                    "complete": false
-                },
-                {
-                    "title": "Formula (check expiration)",
-                    "complete": false
-                }
-            ],
-            "Toys":[
-                {
-                    "title": "Clean counters and floor",
-                    "complete": false
-                }
-            ],
-            "General":[
-                {
-                    "title": "Binky",
-                    "complete": false
-                },
-                {
-                    "title": "Binky wipes",
-                    "complete": false
-                },
-                {
-                    "title": "Nose Cleaner",
-                    "complete": false
-                },
-                {
-                    "title": "Baby sunscreen",
-                    "complete": false
-                },
-                {
-                    "title": "Extra cloth sheet",
-                    "complete": false
-                },
-                {
-                    "title": "Change of clothes",
-                    "complete": false
-                }
-            ],
-            "Parents":[
-                {
-                    "title": "Snacks",
-                    "complete": false
-                },
-                {
-                    "title": "Masks",
-                    "complete": false
-                },
-                {
-                    "title": "Hand sanitizer",
-                    "complete": false
-                },
-                {
-                    "title": "Wet wipes",
-                    "complete": false
-                },
-                {
-                    "title": "Gum",
-                    "complete": false
-                }
-            ],
-            "Before each outing":[
-                {
-                    "title": "Check all pumping equipment",
-                    "complete": false
-                },
-                {
-                    "title": "Extra bottle with parts",
-                    "complete": false
-                },
-                {
-                    "title": "Some toy",
-                    "complete": false
-                },
-                {
-                    "title": "Teether",
-                    "complete": false
-                }
-            ]
-        }
-    }
+    ]
 }

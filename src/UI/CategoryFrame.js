@@ -1,16 +1,44 @@
-import React from 'react';
+import React, { useState } from 'react';
 import classes from './CategoryFrame.module.css';
-import { faPenToSquare} from '@fortawesome/free-solid-svg-icons';
+import { faPenToSquare } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import Modal from './Modal';
+import PromptFrame from '../components/PromptFrame';
 
 const CategoryFrame = (props) => {
+
+    const [modifyingFrame, setModifyingFrame] = useState(false);
+
+    const editButton = (
+        <button onClick={ () => setModifyingFrame(true) }>
+            <FontAwesomeIcon
+                icon={ faPenToSquare }
+                size="lg"
+                className={ classes['header-icon'] } />
+        </button>
+    );
+
+    const modifyFrameTitle = (
+        <Modal>
+            <PromptFrame
+                title={ `Modify ${ props.frameType }` }
+                inputField="New Description"
+                affirmAction="Modify"
+                onCloseModal={ () => setModifyingFrame(false) }
+                onSubmitInput={ (e) => {
+                    props.onSubmitInput(e);
+                    setModifyingFrame(false);
+                } }
+            />
+        </Modal>
+    );
+
     return (
         <div className={ classes.frame }>
-            <div className={classes.header}>
+            { modifyingFrame ? modifyFrameTitle : '' }
+            <div className={ classes.header }>
                 <h1>{ props.title }</h1>
-                <button>
-                    <FontAwesomeIcon icon={ faPenToSquare } size="lg" className={classes['header-icon']}/>
-                </button>
+                { props.modifyTitle ? editButton : '' }
             </div>
             <div className={ classes.window }>
                 { props.children }

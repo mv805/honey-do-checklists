@@ -2,7 +2,6 @@ import React, { useState } from 'react';
 import classes from './ChecklistPage.module.css';
 import pageStyle from './Pages.module.css';
 import CategoryFrame from '../UI/CategoryFrame';
-import uniqid from 'uniqid';
 import { useHistory } from 'react-router-dom';
 import Modal from '../UI/Modal';
 import PromptFrame from '../components/PromptFrame';
@@ -38,16 +37,20 @@ const ChecklistPage = (props) => {
             { addingList ? addChecklistModal : '' }
             <CategoryFrame title="My Checklists">
                 <div className={ classes.lists }>
-                    { Object.keys(props.data).map(checklist => {
-                        return (
-                            <button key={ uniqid() } onClick={ selectList }>
-                                { checklist }
-                            </button>);
-                    }) }
+                    {
+                        props.checklistState.checklists.map(checklist => {
+                            return (
+                                <button key={ checklist.id } onClick={ selectList }>
+                                    { checklist.name }
+                                </button>
+                            );
+                        })
+                    }
                 </div>
             </CategoryFrame>
-            {/* <button onClick={ () => { setAddingList(true); } }>Add list</button> */}
-            <AddFrameButton title="Add Checklist" onClick={ () => { setAddingList(true); } }/>
+            <AddFrameButton
+                title="Add Checklist"
+                onClick={ () => { setAddingList(true); } } />
         </div>
     );
 };
