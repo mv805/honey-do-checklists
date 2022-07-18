@@ -3,11 +3,37 @@ import pageStyle from './Pages.module.css';
 import classes from './TaskPage.module.css';
 import TaskItem from '../components/TaskItem';
 import NewTask from '../components/NewTask';
+import { useState } from 'react';
+import Modal from '../UI/Modal';
+import PromptFrame from '../components/PromptFrame';
+import AddFrameButton from '../components/AddFrameButton';
 
 const TaskPage = (props) => {
 
+    const [addingCategory, setAddingCategory] = useState(false);
+
+    const addingTaskCategory = (
+        <Modal>
+            <PromptFrame
+                title="New Category"
+                inputField="Category Title"
+                affirmAction="Create"
+                onCloseModal={ () => setAddingCategory(false) }
+                onSubmitInput={ (e) => {
+                    props.onAddTaskCategory(
+                        {
+                            newCategoryName: e,
+                        }
+                    );
+                    setAddingCategory(false);
+                } }
+            />
+        </Modal>
+    );
+
     return (
         <div className={ pageStyle.page }>
+            { addingCategory ? addingTaskCategory : '' }
             <h1 className={ classes.title }>{ props.currentChecklist.name }</h1>
             {
                 props.currentChecklist.categories.map(category => {
@@ -48,13 +74,13 @@ const TaskPage = (props) => {
                                         }
                                         onChangeTaskName={ (e) => {
                                             props.onChangeTaskName(
-                                                {   
+                                                {
                                                     oldTitle: task.title,
                                                     newTitle: e,
                                                     category: category.name
                                                 }
                                             );
-                                        }}
+                                        } }
                                     />;
                                 })
                             }
@@ -70,6 +96,9 @@ const TaskPage = (props) => {
                     );
                 })
             }
+            <AddFrameButton
+                title="Add Category"
+                onClick={ () => { setAddingCategory(true); } } />
         </div>
     );
 

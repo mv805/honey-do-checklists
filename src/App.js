@@ -113,11 +113,27 @@ function App() {
         }
 
         taskIndex = state.checklists[currentListIndex].categories[categoryIndex].tasks.findIndex(task => task.title === action.oldTitle);
-        
+
         state.checklists[currentListIndex].categories[categoryIndex].tasks[taskIndex].title = action.newTitle;
 
         return { ...state };
 
+      case 'ADD_TASK_CATEGORY':
+
+        if (state.checklists[currentListIndex].categories.filter(category => category.name.toUpperCase() === action.newCategoryName.toUpperCase()).length > 0) {
+          console.log('Category already exists, skipping...');
+          return { ...state };
+        }
+
+        state.checklists[currentListIndex].categories.push(
+          {
+            name: action.newCategoryName,
+            tasks: [],
+            id: uniqid()
+          }
+        );
+
+        return { ...state };
       default:
         throw new Error();
     }
@@ -153,6 +169,7 @@ function App() {
               onChangeCategoryName={ (e) => dispatchChecklistState({ type: `CHANGE_TASK_CATEGORY_NAME`, ...e }) }
               onDeleteTask={ (e) => dispatchChecklistState({ type: `DELETE_TASK`, ...e }) }
               onChangeTaskName={ (e) => dispatchChecklistState({ type: `CHANGE_TASK_NAME`, ...e }) }
+              onAddTaskCategory={ (e) => dispatchChecklistState({ type: `ADD_TASK_CATEGORY`, ...e }) }
             />
           </Route>
         </Switch>

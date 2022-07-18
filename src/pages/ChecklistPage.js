@@ -30,7 +30,8 @@ const ChecklistPage = (props) => {
                     setAddingList(false);
                 } }
             />
-        </Modal>);
+        </Modal>
+    );
 
     return (
         <div className={ pageStyle.page }>
