@@ -18,7 +18,7 @@ const CategoryFrame = (props) => {
         </button>
     );
 
-    const modifyFrameTitle = (
+    const modifyFrameTitleWindow = (
         <Modal>
             <PromptFrame
                 title={ `Modify ${ props.frameType }` }
@@ -35,7 +35,7 @@ const CategoryFrame = (props) => {
 
     return (
         <div className={ classes.frame }>
-            { modifyingFrame ? modifyFrameTitle : '' }
+            { modifyingFrame ? modifyFrameTitleWindow : '' }
             <div className={ classes.header }>
                 <h1>{ props.title }</h1>
                 { props.modifyTitle ? editButton : '' }
