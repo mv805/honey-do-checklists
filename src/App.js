@@ -23,7 +23,6 @@ function App() {
 
   const checklistReducer = (state, action) => {
 
-    let modifiedList;
     let currentListIndex;
     let categoryIndex;
     let taskIndex;
@@ -86,6 +85,23 @@ function App() {
 
         return { ...state };
 
+      case 'ADD_NEW_TASK':
+        console.log('added: ', action);
+
+        currentListIndex = state.checklists.map(list => list.name).indexOf(currentList);
+
+        categoryIndex = state.checklists[currentListIndex].categories.map(category => category.name).indexOf(action.category);
+
+        state.checklists[currentListIndex].categories[categoryIndex].tasks.push(
+          {
+            title: action.taskName,
+            complete: false,
+            id: uniqid()
+          }
+        );
+
+        return { ...state };
+
       default:
         throw new Error();
     }
@@ -124,6 +140,15 @@ function App() {
     );
   };
 
+  const createNewTask = (newTaskName) => {
+    dispatchChecklistState(
+      {
+        type: 'ADD_NEW_TASK',
+        ...newTaskName
+      }
+    );
+  };
+
   const [currentList, setCurrentList] = useState();
   const [checklistState, dispatchChecklistState] = useReducer(checklistReducer, checklistDataRaw);
 
@@ -150,6 +175,7 @@ function App() {
                 currentList)[0] }
               checklistState={ checklistState }
               onCheck={ checkTask }
+              onCreateNewTask={ createNewTask }
               onChangeCategoryName={ changeCategoryName }
             />
           </Route>

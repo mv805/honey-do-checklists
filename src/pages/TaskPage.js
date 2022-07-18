@@ -1,8 +1,9 @@
-import React from 'react';
+import React, { Fragment } from 'react';
 import CategoryFrame from '../UI/CategoryFrame';
 import pageStyle from './Pages.module.css';
 import classes from './TaskPage.module.css';
 import TaskItem from '../components/TaskItem';
+import NewTask from '../components/NewTask';
 
 const TaskPage = (props) => {
 
@@ -26,7 +27,7 @@ const TaskPage = (props) => {
                                         category: category.name
                                     }
                                 );
-                                
+
                             } }>
 
                             {
@@ -40,6 +41,14 @@ const TaskPage = (props) => {
                                     />;
                                 })
                             }
+                            <NewTask onCreateNewTask={ (e) => {
+                                props.onCreateNewTask(
+                                    {
+                                        taskName: e,
+                                        category: category.name
+                                    }
+                                );
+                            } } />
                         </CategoryFrame>
                     );
                 })

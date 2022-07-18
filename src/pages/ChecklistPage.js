@@ -24,7 +24,7 @@ const ChecklistPage = (props) => {
                 title="New Checklist"
                 inputField="Checklist Title"
                 affirmAction="Create"
-                onCloseModal={ () => { setAddingList(false); } }
+                onCloseModal={ () => setAddingList(false) }
                 onSubmitInput={ (e) => {
                     props.onAddChecklist(e);
                     setAddingList(false);
