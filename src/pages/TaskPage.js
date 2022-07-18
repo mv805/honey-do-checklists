@@ -1,4 +1,3 @@
-import React, { Fragment } from 'react';
 import CategoryFrame from '../UI/CategoryFrame';
 import pageStyle from './Pages.module.css';
 import classes from './TaskPage.module.css';
@@ -37,7 +36,25 @@ const TaskPage = (props) => {
                                         taskCategory={ category.name }
                                         taskName={ task.title }
                                         isChecked={ task.complete }
-                                        onCheck={ props.onCheck }
+                                        onComplete={ props.onComplete }
+                                        onDeleteTask={ () => {
+                                            props.onDeleteTask(
+                                                {
+                                                    title: task.title,
+                                                    category: category.name
+                                                }
+                                            );
+                                        }
+                                        }
+                                        onChangeTaskName={ (e) => {
+                                            props.onChangeTaskName(
+                                                {   
+                                                    oldTitle: task.title,
+                                                    newTitle: e,
+                                                    category: category.name
+                                                }
+                                            );
+                                        }}
                                     />;
                                 })
                             }

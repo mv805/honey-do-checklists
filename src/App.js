@@ -8,7 +8,7 @@ import checklistDataRaw from './checklists.json';
 import TaskPage from './pages/TaskPage';
 import uniqid from 'uniqid';
 
-//adding uniq ids for the keys to the raw data
+//adding uniq ids for the keys into the raw data
 checklistDataRaw.checklists.forEach(checklist => {
   checklist['id'] = uniqid();
   checklist.categories.forEach(category => {
@@ -27,12 +27,15 @@ function App() {
     let categoryIndex;
     let taskIndex;
 
+    currentListIndex = state.checklists.map(list => list.name).indexOf(currentList);
+    categoryIndex = state.checklists[currentListIndex].categories.map(category => category.name).indexOf(action.category);
+
     switch (action.type) {
 
       case 'ADD_CHECKLIST':
 
         //if the list exists, skip instead of overwriting
-        if (state.checklists.filter(checklist => checklist.name === action.newListName).length > 0) {
+        if (state.checklists.filter(checklist => checklist.name.toUpperCase() === action.newListName.toUpperCase()).length > 0) {
           console.log('List already exists, skipping...');
           return { ...state };
         }
@@ -61,10 +64,6 @@ function App() {
 
       case 'COMPLETE_TASK':
 
-        currentListIndex = state.checklists.map(list => list.name).indexOf(currentList);
-
-        categoryIndex = state.checklists[currentListIndex].categories.map(category => category.name).indexOf(action.category);
-
         taskIndex = state.checklists[currentListIndex].categories[categoryIndex].tasks.map(task => task.title).indexOf(action.title);
 
         state.checklists[currentListIndex].categories[categoryIndex].tasks[taskIndex].complete = !state.checklists[currentListIndex].categories[categoryIndex].tasks[taskIndex].complete;
@@ -77,20 +76,16 @@ function App() {
           return { ...state };
         }
 
-        currentListIndex = state.checklists.map(list => list.name).indexOf(currentList);
-
-        categoryIndex = state.checklists[currentListIndex].categories.map(category => category.name).indexOf(action.category);
-
         state.checklists[currentListIndex].categories[categoryIndex].name = action.newName;
 
         return { ...state };
 
       case 'ADD_NEW_TASK':
-        console.log('added: ', action);
 
-        currentListIndex = state.checklists.map(list => list.name).indexOf(currentList);
-
-        categoryIndex = state.checklists[currentListIndex].categories.map(category => category.name).indexOf(action.category);
+        if (state.checklists[currentListIndex].categories[categoryIndex].tasks.filter(task => task.title.toUpperCase() === action.taskName.toUpperCase()).length > 0) {
+          console.log('Task already exists (already on the list), skipping...');
+          return { ...state };
+        }
 
         state.checklists[currentListIndex].categories[categoryIndex].tasks.push(
           {
@@ -102,51 +97,30 @@ function App() {
 
         return { ...state };
 
+      case 'DELETE_TASK':
+
+        taskIndex = state.checklists[currentListIndex].categories[categoryIndex].tasks.findIndex(task => task.title === action.title);
+
+        state.checklists[currentListIndex].categories[categoryIndex].tasks.splice(taskIndex, 1);
+
+        return { ...state };
+
+      case 'CHANGE_TASK_NAME':
+
+        if (state.checklists[currentListIndex].categories[categoryIndex].tasks.filter(task => task.title.toUpperCase() === action.newTitle.toUpperCase()).length > 0) {
+          console.log('Task already exists (same name on the list), skipping...');
+          return { ...state };
+        }
+
+        taskIndex = state.checklists[currentListIndex].categories[categoryIndex].tasks.findIndex(task => task.title === action.oldTitle);
+        
+        state.checklists[currentListIndex].categories[categoryIndex].tasks[taskIndex].title = action.newTitle;
+
+        return { ...state };
+
       default:
         throw new Error();
     }
-  };
-
-  const addChecklist = (name) => {
-    dispatchChecklistState(
-      {
-        type: 'ADD_CHECKLIST',
-        newListName: name,
-      }
-    );
-  };
-
-  const changeToTaskPage = (taskName) => {
-    setCurrentList(taskName);
-  };
-
-  const checkTask = (taskData) => {
-
-    dispatchChecklistState(
-      {
-        type: 'COMPLETE_TASK',
-        ...taskData
-      }
-
-    );
-  };
-
-  const changeCategoryName = (newNameData) => {
-    dispatchChecklistState(
-      {
-        type: 'CHANGE_TASK_CATEGORY_NAME',
-        ...newNameData
-      }
-    );
-  };
-
-  const createNewTask = (newTaskName) => {
-    dispatchChecklistState(
-      {
-        type: 'ADD_NEW_TASK',
-        ...newTaskName
-      }
-    );
   };
 
   const [currentList, setCurrentList] = useState();
@@ -166,17 +140,19 @@ function App() {
           <Route path="/userinfo/my-checklists" exact>
             <ChecklistPage
               checklistState={ checklistState }
-              onAddChecklist={ addChecklist }
-              onTaskPageChange={ changeToTaskPage } />
+              onAddChecklist={ (e) => dispatchChecklistState({ type: `ADD_CHECKLIST`, ...e }) }
+              onTaskPageChange={ (e) => setCurrentList(e) } />
           </Route>
           <Route path="/userinfo/my-checklists/:taskId">
             <TaskPage
               currentChecklist={ checklistState.checklists.filter(checklist => checklist.name ===
                 currentList)[0] }
               checklistState={ checklistState }
-              onCheck={ checkTask }
-              onCreateNewTask={ createNewTask }
-              onChangeCategoryName={ changeCategoryName }
+              onComplete={ (e) => dispatchChecklistState({ type: `COMPLETE_TASK`, ...e }) }
+              onCreateNewTask={ (e) => dispatchChecklistState({ type: `ADD_NEW_TASK`, ...e }) }
+              onChangeCategoryName={ (e) => dispatchChecklistState({ type: `CHANGE_TASK_CATEGORY_NAME`, ...e }) }
+              onDeleteTask={ (e) => dispatchChecklistState({ type: `DELETE_TASK`, ...e }) }
+              onChangeTaskName={ (e) => dispatchChecklistState({ type: `CHANGE_TASK_NAME`, ...e }) }
             />
           </Route>
         </Switch>

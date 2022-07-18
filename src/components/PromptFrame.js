@@ -33,6 +33,14 @@ const PromptFrame = (props) => {
         }
     };
 
+    const deleteButton = (
+        <button 
+        className={ classes['delete-button'] }
+        onClick={props.onDelete}>
+            { `Delete ${ props.deleteItem }` }
+        </button>
+    );
+
     return (
         <div className={ classes.frame }>
             <h1>{ props.title }</h1>
@@ -53,6 +61,7 @@ const PromptFrame = (props) => {
                             { `Must be ${ INPUT_LENGTH_MIN }-${ INPUT_LENGTH_MAX } characters...` }
                         </div> }
                 </div>
+                { props.deleteItem ? deleteButton : '' }
             </form>
             <div className={ classes.buttons }>
                 <button onClick={ props.onCloseModal }>Cancel</button>
