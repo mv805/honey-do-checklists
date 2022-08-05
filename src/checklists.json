@@ -102,7 +102,7 @@
                     "name": "Toys",
                     "tasks": [
                         {
-                            "title": "Clean counters and floor",
+                            "title": "Chew Toy",
                             "complete": false
                         }
                     ]
@@ -170,14 +170,6 @@
                         },
                         {
                             "title": "Extra bottle with parts",
-                            "complete": false
-                        },
-                        {
-                            "title": "Some toy",
-                            "complete": false
-                        },
-                        {
-                            "title": "Teether",
                             "complete": false
                         }
                     ]
