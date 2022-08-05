@@ -12,6 +12,7 @@
 .button {
     border: none;
     color: var(--background);
+    transition: color 0.5s;
     background-color: rgba(0, 0, 0, 0);
     cursor: pointer;
 }
